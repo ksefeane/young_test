@@ -12,16 +12,6 @@
 
 #include "young_test.h"
 
-int		ft_writer(const int fd, const int fd2)
-{
-	char	*w;
-
-	w = NULL;
-	get_next_line(fd, &w);
-	write(fd2, w, ft_strlen(w));
-	return (1);
-}
-
 int		main(int ac, char **av)
 {
 	int		fd;
@@ -33,8 +23,6 @@ int		main(int ac, char **av)
 	if (ac == 1)
 	{
 		fd = 1;
-		fd2 = (fd2 == 0) ? open("sample.txt", O_CREAT | O_RDWR):
-			open("sample.txt", O_RDWR | O_APPEND);
 		ft_writer(fd, fd2);
 	}
 	else if (ac == 2)
