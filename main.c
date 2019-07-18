@@ -12,37 +12,40 @@
 
 #include "young_test.h"
 
-int		ft_reader(const int fd, int n)
+int		ft_writer(const int fd, const int fd2)
 {
 	char	*w;
-	int		i;
 
 	w = NULL;
-	i = 0;
-	if (n == 0)
-		while (get_next_line(fd, &w) != 0)
-		{
-			ft_putendl(w);
-			ft_strdel(&w);
-		}
-	while (i++ < n)
-	{
-		get_next_line(fd, &w);
-		ft_putendl(w);
-		ft_strdel(&w);
-	}
-	(w) ? free(w) : 0;
+	get_next_line(fd, &w);
+	write(fd2, w, ft_strlen(w));
 	return (1);
 }
 
 int		main(int ac, char **av)
 {
 	int		fd;
+	int		fd2;
 
-	if (ac == 3)
-	{
+	fd2 = 0;
+	if (ac > 1)
 		fd = open(av[1], O_RDONLY);
+	if (ac == 1)
+	{
+		fd = 1;
+		fd2 = (fd2 == 0) ? open("sample.txt", O_CREAT | O_RDWR):
+			open("sample.txt", O_RDWR | O_APPEND);
+		ft_writer(fd, fd2);
+	}
+	else if (ac == 2)
+	{
+		ft_reader(fd, 0);
+	}
+	else if (ac == 3)
+	{
 		ft_reader(fd, ft_atoi(av[2]));
 	}
+	else
+		ft_putendl("please select text file to read from");
 	return (0);
 }
