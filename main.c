@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../gnl/get_next_line.h"
-#include <fcntl.h>
+#include "young_test.h"
 
 int		ft_reader(const int fd, int n)
 {

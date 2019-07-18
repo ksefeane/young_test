@@ -1,7 +1,7 @@
 
 NAME = app
 
-SRC = gnl/main.c
+SRC = main.c
 
 LIB = ../libft/libft.a
 
@@ -23,5 +23,8 @@ clean:
 fclean: clean
 
 re: fclean all
+
+lib:
+	@make re -C ../libft
 
 .PHONY: clean fclean all re
